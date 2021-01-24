@@ -1,63 +1,45 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
+import { Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
+import Header from "./components/Header";
+//import {useAuthState} from "./context/AuthContext";
+import PrivateRoute from "./routing/PrivateRoute";
+
 
 export default function App() {
-  return (
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/signup">SingUp</Link>
-              </li>
-              <li>
-                <Link to="/signin">SignIn</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-            </ul>
-          </nav>
+  // const {isAuthenticated} = useAuthState();
 
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+  return (
+      <>
+        <Header />
+        <div className="content">
           <Switch>
+            <Route exact path="/">
+              <Home/>
+            </Route>
             <Route path="/about">
-              <About />
+              <About/>
             </Route>
             <Route path="/signup">
-              <SignUp />
+              <SignUp/>
             </Route>
             <Route path="/signin">
               <SignIn/>
             </Route>
-            <Route path="/profile">
+            <PrivateRoute exact path="/profile">
               <Profile />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
+            </PrivateRoute>
+            {/*<Route path="/profile">*/}
+            {/*  {isAuthenticated ? <Profile /> : <Redirect to="signin" />}*/}
+            {/*</Route>*/}
           </Switch>
         </div>
-      </Router>
+      </>
   );
 }
 
