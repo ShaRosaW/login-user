@@ -11,7 +11,7 @@ export default function IndexSignInForm(){
     const { register, handleSubmit, errors } = useForm();
     // context functies
     const { login } = useContext(AuthContext);
-    const { isAuthenticated } = useAuthState();
+   const { isAuthenticated } = useAuthState();
 
     // gebruiker feedback
     const [loading, toggleLoading] = useState(false);

@@ -17,7 +17,6 @@ function Header() {
 
     return (
         <>
-        <Header/>
             <div>
                 {isAuthenticated ? (
                 <button
